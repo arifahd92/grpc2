@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package blog;
+
+service BlogsService {
+  rpc CreateBlog (CreateBlogDto) returns (blogResponse) {}
+  rpc FindAllBlogs (EmptyBlog) returns (Blogs) {}
+  rpc FindOneBlog (FindOneBlogDto) returns (Blog) {}
+  rpc UpdateBlog (UpdateBlogDto) returns (Blog) {}
+  rpc RemoveBlog (FindOneBlogDto) returns (Success) {}
+
+}
+
+
+message Success{
+  string message=1;
+}
+message UpdateBlogDto {
+  string id = 1;
+  string content = 2;
+  string author = 3;
+}
+
+message FindOneBlogDto {
+  string id = 1;
+
+}
+
+message EmptyBlog {};
+
+message Blogs {
+  repeated Blog blogs = 1;
+}
+
+message CreateBlogDto {
+  string content = 1;
+  string author = 2;
+
+}
+
+message Blog {
+  string id = 1;
+  string content = 2;
+  string author = 3;
+  string userId = 4;
+ 
+}
+
+
+message blogResponse{
+  string message=1;
+  string error=2;
+  Blog Blog=3;
+}
+
